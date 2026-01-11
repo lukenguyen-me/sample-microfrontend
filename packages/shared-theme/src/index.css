@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+/* Scan all app source files for Tailwind classes */
+@source "../../../apps/*/src/**/*.{ts,tsx,js,jsx}";
+
+@plugin "daisyui" {
+  themes:
+    light --default,
+    dark --prefersdark,
+    nord;
+}

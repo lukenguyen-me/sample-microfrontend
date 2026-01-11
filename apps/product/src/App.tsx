@@ -4,7 +4,11 @@ import ProductList from "./ProductList";
 const App: React.FC = () => {
   return (
     <main>
-      <h1>Product Remote (Standalone Dev Mode)</h1>
+      <div className="fixed top-0 w-full text-center bg-neutral p-2">
+        <h1 className="font-semibold text-neutral-content">
+          Product Remote (Standalone Dev Mode)
+        </h1>
+      </div>
       <ProductList title="Previewing Catalog" />
     </main>
   );

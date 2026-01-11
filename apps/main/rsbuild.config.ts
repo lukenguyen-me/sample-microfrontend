@@ -24,6 +24,9 @@ export default defineConfig({
       },
     }),
   ],
+  output: {
+    injectStyles: true,
+  },
   server: {
     port: 3000,
   },

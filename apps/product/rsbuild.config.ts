@@ -8,8 +8,7 @@ export default defineConfig({
     pluginModuleFederation({
       name: "product_remote",
       exposes: {
-        // This key './ProductList' is what the Host will use to import
-        "./ProductList": "./src/ProductListExport.ts",
+        "./ProductList": "./src/ProductList.tsx",
       },
       shared: {
         react: {
@@ -25,6 +24,9 @@ export default defineConfig({
       },
     }),
   ],
+  output: {
+    injectStyles: true,
+  },
   server: {
     port: 3001, // Ensure this doesn't clash with the Host (3000)
   },

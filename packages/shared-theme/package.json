@@ -1,0 +1,15 @@
+{
+  "name": "@repo/shared-theme",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": "./src/index.css"
+  },
+  "devDependencies": {
+    "daisyui": "^5.5.14"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.0",
+    "tailwindcss": "^4.1.0"
+  }
+}
