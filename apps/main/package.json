@@ -1,0 +1,30 @@
+{
+  "name": "main",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "rsbuild dev",
+    "build": "rsbuild build",
+    "preview": "rsbuild preview",
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write \"src/**/*.{tsx,ts,js}\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@module-federation/enhanced": "^0.22.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@module-federation/rsbuild-plugin": "^0.22.0",
+    "@rsbuild/core": "^1.7.2",
+    "@rsbuild/plugin-react": "^1.1.4",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "typescript": "^5.7.3"
+  }
+}
