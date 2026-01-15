@@ -33,19 +33,19 @@ sample-microfrontend/
 
 - **main** (Host): The main application that orchestrates and loads remote microfrontends
   - Port: 3000
-  - Consumes: product, cart, and checkout remotes
+  - Consumes: `product_remote/ProductList`, `cart_remote/Cart`, `checkout_remote/Checkout`
 
-- **product**: Product listing and details microfrontend
+- **product**: Product listing and catalog microfrontend
   - Port: 3001
-  - Exposes: Product components
+  - Exposes: `./ProductList` - Product catalog component with product cards
 
 - **cart**: Shopping cart microfrontend
   - Port: 3002
-  - Exposes: Cart components
+  - Exposes: `./Cart` - Shopping cart component with cart items
 
 - **checkout**: Checkout flow microfrontend
   - Port: 3003
-  - Exposes: Checkout components
+  - Exposes: `./Checkout` - Checkout form component
 
 ### Packages
 
