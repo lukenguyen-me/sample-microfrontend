@@ -1,135 +1,144 @@
-# Turborepo starter
+# Sample Microfrontend
 
-This Turborepo starter is maintained by the Turborepo core team.
+A modern microfrontend architecture demonstration using Module Federation with Rsbuild, managed as a Turborepo monorepo.
 
-## Using this example
+## Architecture Overview
 
-Run the following command:
+This project demonstrates a microfrontend architecture where multiple independent React applications can be composed together at runtime using [Module Federation](https://module-federation.io/). The host application (`main`) dynamically loads remote modules from separate microfrontend applications.
 
-```sh
-npx create-turbo@latest
+### Tech Stack
+
+- **Build Tool**: [Rsbuild](https://rsbuild.dev/) - High-performance build tool based on Rspack
+- **Module Federation**: [@module-federation/enhanced](https://module-federation.io/) for runtime module sharing
+- **Monorepo**: [Turborepo](https://turbo.build/) for build orchestration
+- **Package Manager**: pnpm with workspace support
+- **UI Framework**: React 19
+- **Styling**: Tailwind CSS 4 + DaisyUI
+- **Language**: TypeScript
+
+## Project Structure
+
+```
+sample-microfrontend/
+├── apps/
+│   ├── main/          # Host application (Port 3000)
+│   ├── product/       # Product microfrontend (Port 3001)
+│   ├── cart/          # Cart microfrontend (Port 3002)
+│   └── checkout/      # Checkout microfrontend (Port 3003)
+└── packages/
+    └── shared-theme/  # Shared Tailwind CSS + DaisyUI theme
 ```
 
-## What's inside?
+### Applications
 
-This Turborepo includes the following packages/apps:
+- **main** (Host): The main application that orchestrates and loads remote microfrontends
+  - Port: 3000
+  - Consumes: product, cart, and checkout remotes
 
-### Apps and Packages
+- **product**: Product listing and details microfrontend
+  - Port: 3001
+  - Exposes: Product components
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- **cart**: Shopping cart microfrontend
+  - Port: 3002
+  - Exposes: Cart components
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+- **checkout**: Checkout flow microfrontend
+  - Port: 3003
+  - Exposes: Checkout components
 
-### Utilities
+### Packages
 
-This Turborepo has some additional tools already setup for you:
+- **@repo/shared-theme**: Shared Tailwind CSS configuration and DaisyUI theme used across all microfrontends
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+## Getting Started
+
+### Prerequisites
+
+- Node.js >= 18
+- pnpm 9.0.0
+
+### Installation
+
+```bash
+pnpm install
+```
+
+### Development
+
+Start all applications in development mode:
+
+```bash
+pnpm dev
+```
+
+This will start all microfrontends concurrently:
+- Main app: http://localhost:3000
+- Product: http://localhost:3001
+- Cart: http://localhost:3002
+- Checkout: http://localhost:3003
+
+To run a specific application:
+
+```bash
+pnpm dev --filter=main
+pnpm dev --filter=product
+pnpm dev --filter=cart
+pnpm dev --filter=checkout
+```
 
 ### Build
 
-To build all apps and packages, run the following command:
+Build all applications for production:
 
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+```bash
+pnpm build
 ```
 
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+Build a specific application:
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
+```bash
+pnpm build --filter=main
 ```
 
-### Develop
+### Type Checking
 
-To develop all apps and packages, run the following command:
+Run TypeScript type checking across all applications:
 
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
+```bash
+pnpm check-types
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+### Code Formatting
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
+Format code using Prettier:
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
+```bash
+pnpm format
 ```
 
-### Remote Caching
+## Module Federation Configuration
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+Each microfrontend is configured with Module Federation in their respective `rsbuild.config.ts`:
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+- **Shared Dependencies**: React and React-DOM are configured as singletons to ensure only one instance is loaded
+- **Remote Entry Points**: Each remote exposes components via manifest files (`mf-manifest.json`)
+- **Dynamic Remotes**: The host application loads remotes dynamically at runtime
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+## Key Features
 
-```
-cd my-turborepo
+- Runtime composition of independent React applications
+- Shared dependencies with singleton pattern
+- Independent deployment capability for each microfrontend
+- Shared design system via `@repo/shared-theme`
+- Type-safe development with TypeScript
+- Fast builds with Rsbuild/Rspack
+- Monorepo orchestration with Turborepo
 
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
+## Learn More
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+- [Module Federation Documentation](https://module-federation.io/)
+- [Rsbuild Documentation](https://rsbuild.dev/)
+- [Turborepo Documentation](https://turbo.build/repo/docs)
+- [Tailwind CSS v4](https://tailwindcss.com/)
+- [DaisyUI Components](https://daisyui.com/)
