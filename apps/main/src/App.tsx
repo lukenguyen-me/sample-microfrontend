@@ -4,17 +4,24 @@ const App: React.FC = () => {
   const [RemoteComponent, setRemoteComponent] = useState<React.ComponentType<{
     title: string;
   }> | null>(null);
+  const [CartComponent, setCartComponent] =
+    useState<React.ComponentType<any> | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadRemoteComponent = async () => {
+    const loadRemoteComponents = async () => {
       try {
-        // Dynamically import the remote module
-        const module = await import("product_remote/ProductList");
-        // Get the default export
-        const Component = module.default || module;
-        setRemoteComponent(() => Component);
+        // Dynamically import the product remote module
+        const productModule = await import("product_remote/ProductList");
+        const ProductComponent = productModule.default || productModule;
+        setRemoteComponent(() => ProductComponent);
+
+        // Dynamically import the cart remote module
+        const cartModule = await import("cart_remote/Cart");
+        const CartComp = cartModule.default || cartModule;
+        setCartComponent(() => CartComp);
+
         setLoading(false);
       } catch (e) {
         console.error("Error loading remote:", e);
@@ -23,7 +30,7 @@ const App: React.FC = () => {
       }
     };
 
-    loadRemoteComponent();
+    loadRemoteComponents();
   }, []);
 
   if (loading) {
@@ -59,14 +66,13 @@ const App: React.FC = () => {
   }
 
   return (
-    <main className="min-h-screen">
-      <div className="grid grid-cols-3">
+    <main className="min-h-screen bg-base-200">
+      <div className="grid grid-cols-3 gap-6 p-6">
         <div className="col-span-2">
           {RemoteComponent && <RemoteComponent title="All Products" />}
         </div>
-        <div className="flex flex-col">
-          <div className="card">Cart</div>
-          <div className="card">Checkout</div>
+        <div className="flex flex-col gap-6">
+          {CartComponent && <CartComponent />}
         </div>
       </div>
     </main>
