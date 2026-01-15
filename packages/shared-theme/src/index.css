@@ -4,8 +4,13 @@
 @source "../../../apps/*/src/**/*.{ts,tsx,js,jsx}";
 
 @plugin "daisyui" {
-  themes:
-    light --default,
-    dark --prefersdark,
-    nord;
+  themes: light --default, dark --prefersdark, nord;
+}
+
+/* Workaround: DaisyUI btn border-radius missing due to nested @layer issue in Tailwind v4 */
+.btn:not(.btn-circle) {
+  border-start-start-radius: var(--join-ss, var(--radius-field));
+  border-start-end-radius: var(--join-se, var(--radius-field));
+  border-end-end-radius: var(--join-ee, var(--radius-field));
+  border-end-start-radius: var(--join-es, var(--radius-field));
 }

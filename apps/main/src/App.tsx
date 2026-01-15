@@ -62,7 +62,7 @@ const App: React.FC = () => {
     <main className="min-h-screen">
       <div className="grid grid-cols-3">
         <div className="col-span-2">
-          {RemoteComponent && <RemoteComponent title="Previewing Catalog" />}
+          {RemoteComponent && <RemoteComponent title="All Products" />}
         </div>
         <div className="flex flex-col">
           <div className="card">Cart</div>
