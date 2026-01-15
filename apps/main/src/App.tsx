@@ -6,6 +6,8 @@ const App: React.FC = () => {
   }> | null>(null);
   const [CartComponent, setCartComponent] =
     useState<React.ComponentType<any> | null>(null);
+  const [CheckoutComponent, setCheckoutComponent] =
+    useState<React.ComponentType<any> | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -21,6 +23,11 @@ const App: React.FC = () => {
         const cartModule = await import("cart_remote/Cart");
         const CartComp = cartModule.default || cartModule;
         setCartComponent(() => CartComp);
+
+        // Dynamically import the checkout remote module
+        const checkoutModule = await import("checkout_remote/Checkout");
+        const CheckoutComp = checkoutModule.default || checkoutModule;
+        setCheckoutComponent(() => CheckoutComp);
 
         setLoading(false);
       } catch (e) {
@@ -73,6 +80,7 @@ const App: React.FC = () => {
         </div>
         <div className="flex flex-col gap-6">
           {CartComponent && <CartComponent />}
+          {CheckoutComponent && <CheckoutComponent />}
         </div>
       </div>
     </main>

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Product } from "./types";
 import { products } from "./data/products";
-import ProductSearch from "./ProductSearch";
-import ProductCard from "./ProductCard";
+import ProductSearch from "./components/ProductSearch";
+import ProductCard from "./components/ProductCard";
 
 interface ProductListProps {
   title?: string;

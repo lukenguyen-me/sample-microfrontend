@@ -1,5 +1,5 @@
 import React from "react";
-import { Product } from "./types";
+import { Product } from "../types";
 
 interface ProductCardProps {
   product: Product;
@@ -31,7 +31,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         </p>
         <div className="card-actions justify-end mt-2">
           <button
-            className="btn btn-ghost bg-base-200 hover:bg-base-300 w-full btn-sm"
+            className="btn btn-soft w-full btn-sm"
             onClick={() => onAddToCart(product)}
           >
             Add to Cart

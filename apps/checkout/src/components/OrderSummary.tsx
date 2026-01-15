@@ -1,0 +1,40 @@
+import React from "react";
+import type { CheckoutItem } from "../types";
+
+interface OrderSummaryProps {
+  items: CheckoutItem[];
+}
+
+const OrderSummary: React.FC<OrderSummaryProps> = ({ items }) => {
+  const subtotal = items.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+  const taxRate = 0.08;
+  const tax = subtotal * taxRate;
+  const total = subtotal + tax;
+
+  return (
+    <div className="bg-base-200 rounded-lg p-4 flex flex-col gap-2">
+      <div className="flex justify-between text-sm">
+        <span className="text-base-content/60">Subtotal</span>
+        <span className="text-base-content font-medium">
+          ${subtotal.toFixed(2)}
+        </span>
+      </div>
+      <div className="flex justify-between text-sm">
+        <span className="text-base-content/60">Tax (8%)</span>
+        <span className="text-base-content font-medium">${tax.toFixed(2)}</span>
+      </div>
+      <div className="h-px bg-base-300 my-1"></div>
+      <div className="flex justify-between text-base">
+        <span className="text-base-content font-bold">Total</span>
+        <span className="text-primary font-bold text-lg">
+          ${total.toFixed(2)}
+        </span>
+      </div>
+    </div>
+  );
+};
+
+export default OrderSummary;
