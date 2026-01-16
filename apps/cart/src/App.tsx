@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import Cart from "./Cart";
 
 const App: React.FC = () => {

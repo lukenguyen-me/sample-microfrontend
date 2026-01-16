@@ -1,11 +1,13 @@
 /// <reference types="react" />
 
+import type { CartItem, CheckoutItem, Product } from "@repo/shared-store";
+
 declare module "product_remote/ProductList" {
-  import { ComponentType } from "react";
+  import type { ComponentType } from "react";
 
   interface ProductListProps {
     title?: string;
-    onAddToCart?: (product: any) => void;
+    onAddToCart?: (product: Product) => void;
   }
 
   const ProductList: ComponentType<ProductListProps>;
@@ -13,11 +15,11 @@ declare module "product_remote/ProductList" {
 }
 
 declare module "cart_remote/Cart" {
-  import { ComponentType } from "react";
+  import type { ComponentType } from "react";
 
   interface CartProps {
     title?: string;
-    items?: any[];
+    items?: CartItem[];
     isActive?: boolean;
     className?: string;
   }
@@ -27,10 +29,10 @@ declare module "cart_remote/Cart" {
 }
 
 declare module "checkout_remote/Checkout" {
-  import { ComponentType } from "react";
+  import type { ComponentType } from "react";
 
   interface CheckoutProps {
-    items?: any[];
+    items?: CheckoutItem[];
     isActive?: boolean;
     onCancel?: () => void;
     onPlaceOrder?: (paymentMethod: string) => void;

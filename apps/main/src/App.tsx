@@ -1,15 +1,37 @@
-import React, { useState, useEffect } from "react";
+/// <reference path="./remotes.d.ts" />
+
+import type { CartItem, CheckoutItem } from "@repo/shared-store";
 import { EcommerceProvider, useEcommerceStore } from "@repo/shared-store";
+import type React from "react";
+import { useEffect, useState } from "react";
+
+interface ProductListProps {
+  title?: string;
+}
+
+interface CartProps {
+  title?: string;
+  items?: CartItem[];
+  isActive?: boolean;
+  className?: string;
+}
+
+interface CheckoutProps {
+  items?: CheckoutItem[];
+  isActive?: boolean;
+  onCancel?: () => void;
+  onPlaceOrder?: (paymentMethod: string) => void;
+  className?: string;
+}
 
 // Inner component that uses the store
 const AppContent: React.FC = () => {
-  const [RemoteComponent, setRemoteComponent] = useState<React.ComponentType<{
-    title: string;
-  }> | null>(null);
+  const [RemoteComponent, setRemoteComponent] =
+    useState<React.ComponentType<ProductListProps> | null>(null);
   const [CartComponent, setCartComponent] =
-    useState<React.ComponentType<any> | null>(null);
+    useState<React.ComponentType<CartProps> | null>(null);
   const [CheckoutComponent, setCheckoutComponent] =
-    useState<React.ComponentType<any> | null>(null);
+    useState<React.ComponentType<CheckoutProps> | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -62,7 +84,9 @@ const AppContent: React.FC = () => {
             className="stroke-current shrink-0 h-6 w-6"
             fill="none"
             viewBox="0 0 24 24"
+            aria-labelledby="error-icon-title"
           >
+            <title id="error-icon-title">Error</title>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -88,7 +112,9 @@ const AppContent: React.FC = () => {
           </div>
           <div className="flex flex-col gap-6">
             {CartComponent && <CartComponent isActive={isCartActive} />}
-            {CheckoutComponent && <CheckoutComponent isActive={isCheckoutActive} />}
+            {CheckoutComponent && (
+              <CheckoutComponent isActive={isCheckoutActive} />
+            )}
           </div>
         </div>
       </div>

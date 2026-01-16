@@ -1,6 +1,6 @@
-import React from "react";
-import type { CartItem } from "./types";
 import { formatCurrency } from "@repo/shared-utils";
+import type React from "react";
+import type { CartItem } from "./types";
 
 interface CartItemProps {
   item: CartItem;
@@ -10,10 +10,10 @@ interface CartItemProps {
 const CartItemRow: React.FC<CartItemProps> = ({ item, onRemove }) => {
   return (
     <div className="flex gap-4 items-center">
-      <div
-        className="w-16 h-16 rounded-md bg-cover bg-center shrink-0 border border-base-200"
-        style={{ backgroundImage: `url(${item.image})` }}
-        aria-label={`${item.name} thumbnail`}
+      <img
+        src={item.image}
+        alt={`${item.name} thumbnail`}
+        className="w-16 h-16 rounded-md object-cover shrink-0 border border-base-200"
       />
       <div className="flex flex-col flex-1">
         <span className="text-sm font-medium text-base-content">
@@ -25,9 +25,12 @@ const CartItemRow: React.FC<CartItemProps> = ({ item, onRemove }) => {
             ${formatCurrency(item.price)}
           </span>
           <div className="flex items-center gap-2">
-            <div className="badge badge-ghost text-xs">Qty: {item.quantity}</div>
+            <div className="badge badge-ghost text-xs">
+              Qty: {item.quantity}
+            </div>
             {onRemove && (
               <button
+                type="button"
                 onClick={onRemove}
                 className="btn btn-ghost btn-xs btn-circle text-error hover:bg-error/10"
                 aria-label={`Remove ${item.name}`}
@@ -38,7 +41,9 @@ const CartItemRow: React.FC<CartItemProps> = ({ item, onRemove }) => {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
+                  aria-labelledby="remove-icon-title"
                 >
+                  <title id="remove-icon-title">Remove item</title>
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"

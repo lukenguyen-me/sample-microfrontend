@@ -1,8 +1,8 @@
-import React from "react";
+import { useCart } from "@repo/shared-store";
+import type React from "react";
 import CartItemRow from "./CartItem";
 import { defaultCartItems } from "./data/mockCartData";
 import type { CartProps } from "./types";
-import { useCart } from "@repo/shared-store";
 
 const Cart: React.FC<CartProps> = ({
   title = "Shopping Cart",
@@ -67,6 +67,7 @@ const Cart: React.FC<CartProps> = ({
         {/* Always show checkout button, disabled when cart is empty */}
         <div className="card-actions">
           <button
+            type="button"
             className="btn btn-primary btn-block rounded-none"
             onClick={handleCheckout}
             disabled={!isActive || items.length === 0}

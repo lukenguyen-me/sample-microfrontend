@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import type { PaymentMethodType } from "../types";
 
 interface PaymentMethodProps {
@@ -13,9 +13,9 @@ const PaymentMethod: React.FC<PaymentMethodProps> = ({
   const isDisabled = !onSelect;
   return (
     <div className="flex flex-col gap-3">
-      <label className="text-sm font-semibold text-base-content">
+      <div className="text-sm font-semibold text-base-content">
         Select Payment Method
-      </label>
+      </div>
 
       <label
         className={`flex items-center justify-between p-3 rounded-lg border transition-all ${
@@ -44,6 +44,8 @@ const PaymentMethod: React.FC<PaymentMethodProps> = ({
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            role="image"
+            aria-label="Credit card icon"
           >
             <path
               strokeLinecap="round"
@@ -82,6 +84,8 @@ const PaymentMethod: React.FC<PaymentMethodProps> = ({
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            role="image"
+            aria-label="Bank transfer icon"
           >
             <path
               strokeLinecap="round"

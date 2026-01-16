@@ -1,18 +1,18 @@
 import {
   createContext,
-  useContext,
-  useReducer,
+  type ReactNode,
   useCallback,
+  useContext,
   useMemo,
-  ReactNode,
+  useReducer,
 } from "react";
 import type {
+  ActivePanel,
+  CartItem,
   EcommerceState,
   EcommerceStore,
-  CartItem,
-  Product,
   PaymentMethodType,
-  ActivePanel,
+  Product,
 } from "../types";
 
 // ============================================
@@ -45,13 +45,13 @@ type EcommerceAction =
 
 function ecommerceReducer(
   state: EcommerceState,
-  action: EcommerceAction
+  action: EcommerceAction,
 ): EcommerceState {
   switch (action.type) {
     case "ADD_TO_CART": {
       const { product, variant = "Default" } = action.payload;
       const existingItem = state.cartItems.find(
-        (item) => item.productId === product.id && item.variant === variant
+        (item) => item.productId === product.id && item.variant === variant,
       );
 
       if (existingItem) {
@@ -61,7 +61,7 @@ function ecommerceReducer(
           cartItems: state.cartItems.map((item) =>
             item.id === existingItem.id
               ? { ...item, quantity: item.quantity + 1 }
-              : item
+              : item,
           ),
         };
       }
@@ -92,7 +92,7 @@ function ecommerceReducer(
         return {
           ...state,
           cartItems: state.cartItems.map((i) =>
-            i.id === itemId ? { ...i, quantity: i.quantity - 1 } : i
+            i.id === itemId ? { ...i, quantity: i.quantity - 1 } : i,
           ),
         };
       }
@@ -115,7 +115,7 @@ function ecommerceReducer(
       return {
         ...state,
         cartItems: state.cartItems.map((item) =>
-          item.id === itemId ? { ...item, quantity } : item
+          item.id === itemId ? { ...item, quantity } : item,
         ),
       };
     }
@@ -233,7 +233,7 @@ export function EcommerceProvider({
       cancelCheckout,
       placeOrder,
       resetOrder,
-    ]
+    ],
   );
 
   return (
@@ -271,7 +271,7 @@ export function useCart(fallbackItems?: CartItem[]) {
     const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
     const totalPrice = items.reduce(
       (sum, item) => sum + item.price * item.quantity,
-      0
+      0,
     );
 
     return {

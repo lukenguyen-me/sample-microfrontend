@@ -1,24 +1,24 @@
 // Context and Provider
 export {
-  EcommerceProvider,
   EcommerceContext,
-  useEcommerceStore,
+  EcommerceProvider,
   useCart,
   useCheckout,
+  useEcommerceStore,
 } from "./context/EcommerceContext";
 
 // Types
 export type {
-  Product,
-  CartItem,
-  CheckoutItem,
-  PaymentMethodType,
   ActivePanel,
-  PanelState,
-  EcommerceState,
-  EcommerceActions,
-  EcommerceStore,
-  ProductListProps,
+  CartItem,
   CartProps,
+  CheckoutItem,
   CheckoutProps,
+  EcommerceActions,
+  EcommerceState,
+  EcommerceStore,
+  PanelState,
+  PaymentMethodType,
+  Product,
+  ProductListProps,
 } from "./types";

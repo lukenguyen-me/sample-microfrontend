@@ -1,6 +1,6 @@
-import React from "react";
-import { Product } from "../types";
 import { formatCurrency } from "@repo/shared-utils";
+import type React from "react";
+import type { Product } from "../types";
 
 interface ProductCardProps {
   product: Product;
@@ -32,6 +32,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         </p>
         <div className="card-actions justify-end mt-2">
           <button
+            type="button"
             className="btn btn-soft w-full btn-sm"
             onClick={() => onAddToCart(product)}
           >

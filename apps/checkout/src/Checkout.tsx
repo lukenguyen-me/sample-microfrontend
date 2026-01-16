@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import { useCheckout } from "@repo/shared-store";
+import type React from "react";
+import { useState } from "react";
 import OrderSummary from "./components/OrderSummary";
 import PaymentMethod from "./components/PaymentMethod";
 import { defaultCheckoutItems } from "./data/mockCheckoutData";
 import type { CheckoutProps, PaymentMethodType } from "./types";
-import { useCheckout } from "@repo/shared-store";
 
 const Checkout: React.FC<CheckoutProps> = ({
   items: propItems,
@@ -42,7 +43,9 @@ const Checkout: React.FC<CheckoutProps> = ({
 
   return (
     <div
-      className={`card bg-base-100 shadow-sm relative overflow-hidden ${!isActive ? "opacity-60" : ""} ${className}`}
+      className={`card bg-base-100 shadow-sm relative overflow-hidden ${
+        !isActive ? "opacity-60" : ""
+      } ${className}`}
     >
       {/* Active state accent line */}
       {isActive && (
@@ -64,6 +67,7 @@ const Checkout: React.FC<CheckoutProps> = ({
 
           <div className="flex gap-3 mt-2">
             <button
+              type="button"
               onClick={handleCancel}
               className="btn btn-soft flex-1 rounded-lg"
               disabled={!isActive}
@@ -71,6 +75,7 @@ const Checkout: React.FC<CheckoutProps> = ({
               Cancel
             </button>
             <button
+              type="button"
               onClick={handlePlaceOrder}
               className="btn btn-primary flex-2 rounded-lg"
               disabled={!isActive}
@@ -82,6 +87,8 @@ const Checkout: React.FC<CheckoutProps> = ({
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
+                role="img"
+                aria-label="Place order icon"
               >
                 <path
                   strokeLinecap="round"

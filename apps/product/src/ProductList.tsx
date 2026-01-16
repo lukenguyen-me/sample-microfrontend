@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { Product } from "./types";
-import { products } from "./data/products";
-import ProductSearch from "./components/ProductSearch";
-import ProductCard from "./components/ProductCard";
 import { useCart } from "@repo/shared-store";
+import type React from "react";
+import { useState } from "react";
+import ProductCard from "./components/ProductCard";
+import ProductSearch from "./components/ProductSearch";
+import { products } from "./data/products";
+import type { Product } from "./types";
 
 interface ProductListProps {
   title?: string;
@@ -17,7 +18,7 @@ const ProductList: React.FC<ProductListProps> = ({ onAddToCart }) => {
   const filteredProducts = products.filter(
     (product) =>
       product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      product.description.toLowerCase().includes(searchQuery.toLowerCase())
+      product.description.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   const handleAddToCart = (product: Product) => {

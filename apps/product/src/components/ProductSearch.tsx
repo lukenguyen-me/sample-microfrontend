@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 
 interface ProductSearchProps {
   searchQuery: string;
@@ -22,7 +22,9 @@ const ProductSearch: React.FC<ProductSearchProps> = ({
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            aria-labelledby="search-icon-title"
           >
+            <title id="search-icon-title">Search</title>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
