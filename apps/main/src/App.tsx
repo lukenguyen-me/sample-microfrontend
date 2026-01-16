@@ -81,13 +81,15 @@ const AppContent: React.FC = () => {
 
   return (
     <main className="min-h-screen bg-base-200">
-      <div className="grid grid-cols-3 gap-6 p-6">
-        <div className="col-span-2">
-          {RemoteComponent && <RemoteComponent title="All Products" />}
-        </div>
-        <div className="flex flex-col gap-6">
-          {CartComponent && <CartComponent isActive={isCartActive} />}
-          {CheckoutComponent && <CheckoutComponent isActive={isCheckoutActive} />}
+      <div className="container mx-auto max-w-screen-2xl">
+        <div className="grid grid-cols-3 gap-6 p-6">
+          <div className="col-span-2">
+            {RemoteComponent && <RemoteComponent title="All Products" />}
+          </div>
+          <div className="flex flex-col gap-6">
+            {CartComponent && <CartComponent isActive={isCartActive} />}
+            {CheckoutComponent && <CheckoutComponent isActive={isCheckoutActive} />}
+          </div>
         </div>
       </div>
     </main>

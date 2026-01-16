@@ -5,6 +5,7 @@ export interface CheckoutItem {
   price: number;
   quantity: number;
   image: string;
+  productId: number;
 }
 
 export type PaymentMethodType = "credit_card" | "bank_transfer";
