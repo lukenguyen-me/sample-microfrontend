@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { EcommerceProvider, useEcommerceStore } from "@repo/shared-store";
 
-const App: React.FC = () => {
+// Inner component that uses the store
+const AppContent: React.FC = () => {
   const [RemoteComponent, setRemoteComponent] = useState<React.ComponentType<{
     title: string;
   }> | null>(null);
@@ -10,6 +12,8 @@ const App: React.FC = () => {
     useState<React.ComponentType<any> | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const store = useEcommerceStore();
 
   useEffect(() => {
     const loadRemoteComponents = async () => {
@@ -72,6 +76,9 @@ const App: React.FC = () => {
     );
   }
 
+  const isCartActive = store?.activePanel === "cart";
+  const isCheckoutActive = store?.activePanel === "checkout";
+
   return (
     <main className="min-h-screen bg-base-200">
       <div className="grid grid-cols-3 gap-6 p-6">
@@ -79,11 +86,20 @@ const App: React.FC = () => {
           {RemoteComponent && <RemoteComponent title="All Products" />}
         </div>
         <div className="flex flex-col gap-6">
-          {CartComponent && <CartComponent />}
-          {CheckoutComponent && <CheckoutComponent />}
+          {CartComponent && <CartComponent isActive={isCartActive} />}
+          {CheckoutComponent && <CheckoutComponent isActive={isCheckoutActive} />}
         </div>
       </div>
     </main>
+  );
+};
+
+// Main App with Provider
+const App: React.FC = () => {
+  return (
+    <EcommerceProvider>
+      <AppContent />
+    </EcommerceProvider>
   );
 };
 

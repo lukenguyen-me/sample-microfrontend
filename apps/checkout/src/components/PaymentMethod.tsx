@@ -3,13 +3,14 @@ import type { PaymentMethodType } from "../types";
 
 interface PaymentMethodProps {
   selected: PaymentMethodType;
-  onSelect: (method: PaymentMethodType) => void;
+  onSelect?: (method: PaymentMethodType) => void;
 }
 
 const PaymentMethod: React.FC<PaymentMethodProps> = ({
   selected,
   onSelect,
 }) => {
+  const isDisabled = !onSelect;
   return (
     <div className="flex flex-col gap-3">
       <label className="text-sm font-semibold text-base-content">
@@ -17,11 +18,11 @@ const PaymentMethod: React.FC<PaymentMethodProps> = ({
       </label>
 
       <label
-        className={`flex items-center justify-between p-3 rounded-lg border cursor-pointer transition-all ${
+        className={`flex items-center justify-between p-3 rounded-lg border transition-all ${
           selected === "credit_card"
             ? "border-primary bg-primary/5"
             : "border-base-300 hover:border-base-content/40"
-        }`}
+        } ${isDisabled ? "cursor-not-allowed opacity-60" : "cursor-pointer"}`}
       >
         <div className="flex items-center gap-3">
           <input
@@ -29,7 +30,8 @@ const PaymentMethod: React.FC<PaymentMethodProps> = ({
             name="payment"
             className="radio radio-primary"
             checked={selected === "credit_card"}
-            onChange={() => onSelect("credit_card")}
+            onChange={() => onSelect?.("credit_card")}
+            disabled={isDisabled}
           />
           <span className="text-sm font-medium text-base-content">
             Credit Card
@@ -54,11 +56,11 @@ const PaymentMethod: React.FC<PaymentMethodProps> = ({
       </label>
 
       <label
-        className={`flex items-center justify-between p-3 rounded-lg border cursor-pointer transition-all ${
+        className={`flex items-center justify-between p-3 rounded-lg border transition-all ${
           selected === "bank_transfer"
             ? "border-primary bg-primary/5"
             : "border-base-300 hover:border-base-content/40"
-        }`}
+        } ${isDisabled ? "cursor-not-allowed opacity-60" : "cursor-pointer"}`}
       >
         <div className="flex items-center gap-3">
           <input
@@ -66,7 +68,8 @@ const PaymentMethod: React.FC<PaymentMethodProps> = ({
             name="payment"
             className="radio radio-primary"
             checked={selected === "bank_transfer"}
-            onChange={() => onSelect("bank_transfer")}
+            onChange={() => onSelect?.("bank_transfer")}
+            disabled={isDisabled}
           />
           <span className="text-sm font-medium text-base-content">
             Bank Transfer

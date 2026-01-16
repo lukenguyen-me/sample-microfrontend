@@ -3,6 +3,9 @@ import { pluginReact } from "@rsbuild/plugin-react";
 import { pluginModuleFederation } from "@module-federation/rsbuild-plugin";
 
 export default defineConfig({
+  source: {
+    assetsInclude: /\.svg$/,
+  },
   plugins: [
     pluginReact(),
     pluginModuleFederation({
@@ -20,6 +23,11 @@ export default defineConfig({
           eager: false,
         },
         "react-dom": {
+          singleton: true,
+          requiredVersion: false,
+          eager: false,
+        },
+        "@repo/shared-store": {
           singleton: true,
           requiredVersion: false,
           eager: false,

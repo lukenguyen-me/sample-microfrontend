@@ -18,11 +18,112 @@ importers:
         specifier: 5.9.2
         version: 5.9.2
 
+  apps/cart:
+    dependencies:
+      '@module-federation/enhanced':
+        specifier: ^0.22.0
+        version: 0.22.0(@rspack/core@1.7.1(@swc/helpers@0.5.18))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.2)(webpack@5.104.1)
+      '@repo/shared-store':
+        specifier: workspace:*
+        version: link:../../packages/shared-store
+      '@repo/shared-theme':
+        specifier: workspace:*
+        version: link:../../packages/shared-theme
+      '@repo/shared-utils':
+        specifier: workspace:*
+        version: link:../../packages/shared-utils
+      react:
+        specifier: ^19.0.0
+        version: 19.2.0
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.2.0(react@19.2.0)
+    devDependencies:
+      '@module-federation/rsbuild-plugin':
+        specifier: ^0.22.0
+        version: 0.22.0(@rsbuild/core@1.7.2)(@rspack/core@1.7.1(@swc/helpers@0.5.18))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.2)(webpack@5.104.1)
+      '@rsbuild/core':
+        specifier: ^1.7.2
+        version: 1.7.2
+      '@rsbuild/plugin-react':
+        specifier: ^1.1.4
+        version: 1.4.2(@rsbuild/core@1.7.2)
+      '@tailwindcss/postcss':
+        specifier: ^4.1.0
+        version: 4.1.18
+      '@types/react':
+        specifier: ^19.0.2
+        version: 19.2.8
+      '@types/react-dom':
+        specifier: ^19.0.2
+        version: 19.2.3(@types/react@19.2.8)
+      daisyui:
+        specifier: ^5.0.0
+        version: 5.5.14
+      tailwindcss:
+        specifier: ^4.1.0
+        version: 4.1.18
+      typescript:
+        specifier: ^5.7.3
+        version: 5.9.2
+
+  apps/checkout:
+    dependencies:
+      '@module-federation/enhanced':
+        specifier: ^0.22.0
+        version: 0.22.0(@rspack/core@1.7.1(@swc/helpers@0.5.18))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.2)(webpack@5.104.1)
+      '@repo/shared-store':
+        specifier: workspace:*
+        version: link:../../packages/shared-store
+      '@repo/shared-theme':
+        specifier: workspace:*
+        version: link:../../packages/shared-theme
+      '@repo/shared-utils':
+        specifier: workspace:*
+        version: link:../../packages/shared-utils
+      react:
+        specifier: ^19.0.0
+        version: 19.2.0
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.2.0(react@19.2.0)
+    devDependencies:
+      '@module-federation/rsbuild-plugin':
+        specifier: ^0.22.0
+        version: 0.22.0(@rsbuild/core@1.7.2)(@rspack/core@1.7.1(@swc/helpers@0.5.18))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.2)(webpack@5.104.1)
+      '@rsbuild/core':
+        specifier: ^1.7.2
+        version: 1.7.2
+      '@rsbuild/plugin-react':
+        specifier: ^1.1.4
+        version: 1.4.2(@rsbuild/core@1.7.2)
+      '@tailwindcss/postcss':
+        specifier: ^4.1.0
+        version: 4.1.18
+      '@types/react':
+        specifier: ^19.0.2
+        version: 19.2.8
+      '@types/react-dom':
+        specifier: ^19.0.2
+        version: 19.2.3(@types/react@19.2.8)
+      daisyui:
+        specifier: ^5.0.0
+        version: 5.5.14
+      tailwindcss:
+        specifier: ^4.1.0
+        version: 4.1.18
+      typescript:
+        specifier: ^5.7.3
+        version: 5.9.2
+
   apps/main:
     dependencies:
       '@module-federation/enhanced':
         specifier: ^0.22.0
         version: 0.22.0(@rspack/core@1.7.1(@swc/helpers@0.5.18))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.2)(webpack@5.104.1)
+      '@repo/shared-store':
+        specifier: workspace:*
+        version: link:../../packages/shared-store
       '@repo/shared-theme':
         specifier: workspace:*
         version: link:../../packages/shared-theme
@@ -66,9 +167,15 @@ importers:
       '@module-federation/enhanced':
         specifier: ^0.22.0
         version: 0.22.0(@rspack/core@1.7.1(@swc/helpers@0.5.18))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.2)(webpack@5.104.1)
+      '@repo/shared-store':
+        specifier: workspace:*
+        version: link:../../packages/shared-store
       '@repo/shared-theme':
         specifier: workspace:*
         version: link:../../packages/shared-theme
+      '@repo/shared-utils':
+        specifier: workspace:*
+        version: link:../../packages/shared-utils
       react:
         specifier: ^19.0.0
         version: 19.2.0
@@ -104,6 +211,19 @@ importers:
         specifier: ^5.7.3
         version: 5.9.2
 
+  packages/shared-store:
+    dependencies:
+      react:
+        specifier: ^19.0.0
+        version: 19.2.0
+    devDependencies:
+      '@types/react':
+        specifier: ^19.0.2
+        version: 19.2.8
+      typescript:
+        specifier: ^5.7.3
+        version: 5.9.2
+
   packages/shared-theme:
     dependencies:
       '@tailwindcss/postcss':
@@ -116,6 +236,8 @@ importers:
       daisyui:
         specifier: ^5.5.14
         version: 5.5.14
+
+  packages/shared-utils: {}
 
 packages:
 

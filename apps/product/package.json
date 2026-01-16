@@ -16,7 +16,9 @@
   "license": "ISC",
   "dependencies": {
     "@module-federation/enhanced": "^0.22.0",
+    "@repo/shared-store": "workspace:*",
     "@repo/shared-theme": "workspace:*",
+    "@repo/shared-utils": "workspace:*",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

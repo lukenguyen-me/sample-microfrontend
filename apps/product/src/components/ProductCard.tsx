@@ -1,5 +1,6 @@
 import React from "react";
 import { Product } from "../types";
+import { formatCurrency } from "@repo/shared-utils";
 
 interface ProductCardProps {
   product: Product;
@@ -23,7 +24,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             {product.name}
           </h2>
           <p className="text-base font-bold leading-normal whitespace-nowrap">
-            ${product.price.toFixed(2)}
+            ${formatCurrency(product.price)}
           </p>
         </div>
         <p className="text-base-content/60 text-sm font-normal leading-normal line-clamp-1">

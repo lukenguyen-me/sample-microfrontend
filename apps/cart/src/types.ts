@@ -10,5 +10,6 @@ export interface CartItem {
 export interface CartProps {
   title?: string;
   items?: CartItem[];
+  isActive?: boolean;
   className?: string;
 }

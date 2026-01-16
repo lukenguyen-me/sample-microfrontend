@@ -3,19 +3,28 @@ import OrderSummary from "./components/OrderSummary";
 import PaymentMethod from "./components/PaymentMethod";
 import { defaultCheckoutItems } from "./data/mockCheckoutData";
 import type { CheckoutProps, PaymentMethodType } from "./types";
+import { useCheckout } from "@repo/shared-store";
 
 const Checkout: React.FC<CheckoutProps> = ({
-  items = defaultCheckoutItems,
+  items: propItems,
+  isActive: propIsActive,
   onCancel,
   onPlaceOrder,
   className = "",
 }) => {
+  const checkout = useCheckout(defaultCheckoutItems);
   const [paymentMethod, setPaymentMethod] =
     useState<PaymentMethodType>("credit_card");
+
+  // Use prop values if provided, otherwise use store values
+  const items = propItems ?? checkout.items;
+  const isActive = propIsActive ?? checkout.isActive;
 
   const handleCancel = () => {
     if (onCancel) {
       onCancel();
+    } else if (checkout.cancelCheckout) {
+      checkout.cancelCheckout();
     } else {
       console.log("Checkout cancelled");
     }
@@ -24,14 +33,21 @@ const Checkout: React.FC<CheckoutProps> = ({
   const handlePlaceOrder = () => {
     if (onPlaceOrder) {
       onPlaceOrder(paymentMethod);
+    } else if (checkout.placeOrder) {
+      checkout.placeOrder(paymentMethod);
     } else {
       console.log("Order placed with payment method:", paymentMethod);
     }
   };
 
   return (
-    <div className="card bg-base-100 shadow-sm relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-1 bg-secondary"></div>
+    <div
+      className={`card bg-base-100 shadow-sm relative overflow-hidden ${!isActive ? "opacity-60" : ""} ${className}`}
+    >
+      {/* Active state accent line */}
+      {isActive && (
+        <div className="absolute top-0 left-0 w-full h-1 bg-secondary"></div>
+      )}
 
       <div className="card-body">
         <h3 className="text-lg font-bold text-base-content pb-2 border-b border-base-300">
@@ -41,18 +57,23 @@ const Checkout: React.FC<CheckoutProps> = ({
         <div className="flex flex-col gap-6 pt-2">
           <OrderSummary items={items} />
 
-          <PaymentMethod selected={paymentMethod} onSelect={setPaymentMethod} />
+          <PaymentMethod
+            selected={paymentMethod}
+            onSelect={isActive ? setPaymentMethod : undefined}
+          />
 
           <div className="flex gap-3 mt-2">
             <button
               onClick={handleCancel}
               className="btn btn-soft flex-1 rounded-lg"
+              disabled={!isActive}
             >
               Cancel
             </button>
             <button
               onClick={handlePlaceOrder}
               className="btn btn-primary flex-2 rounded-lg"
+              disabled={!isActive}
             >
               Place Order
               <svg

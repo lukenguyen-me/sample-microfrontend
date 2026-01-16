@@ -3,13 +3,16 @@ import { Product } from "./types";
 import { products } from "./data/products";
 import ProductSearch from "./components/ProductSearch";
 import ProductCard from "./components/ProductCard";
+import { useCart } from "@repo/shared-store";
 
 interface ProductListProps {
   title?: string;
+  onAddToCart?: (product: Product) => void;
 }
 
-const ProductList: React.FC<ProductListProps> = () => {
+const ProductList: React.FC<ProductListProps> = ({ onAddToCart }) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const { addToCart: storeAddToCart } = useCart();
 
   const filteredProducts = products.filter(
     (product) =>
@@ -18,7 +21,15 @@ const ProductList: React.FC<ProductListProps> = () => {
   );
 
   const handleAddToCart = (product: Product) => {
-    alert(`Added ${product.name} to cart!`);
+    // Use prop callback if provided, otherwise use store, otherwise alert
+    if (onAddToCart) {
+      onAddToCart(product);
+    } else if (storeAddToCart) {
+      storeAddToCart(product);
+    } else {
+      // Standalone fallback
+      alert(`Added ${product.name} to cart!`);
+    }
   };
 
   return (

@@ -1,5 +1,6 @@
 import React from "react";
 import type { CheckoutItem } from "../types";
+import { formatCurrency } from "@repo/shared-utils";
 
 interface OrderSummaryProps {
   items: CheckoutItem[];
@@ -19,18 +20,18 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ items }) => {
       <div className="flex justify-between text-sm">
         <span className="text-base-content/60">Subtotal</span>
         <span className="text-base-content font-medium">
-          ${subtotal.toFixed(2)}
+          ${formatCurrency(subtotal)}
         </span>
       </div>
       <div className="flex justify-between text-sm">
         <span className="text-base-content/60">Tax (8%)</span>
-        <span className="text-base-content font-medium">${tax.toFixed(2)}</span>
+        <span className="text-base-content font-medium">${formatCurrency(tax)}</span>
       </div>
       <div className="h-px bg-base-300 my-1"></div>
       <div className="flex justify-between text-base">
         <span className="text-base-content font-bold">Total</span>
         <span className="text-primary font-bold text-lg">
-          ${total.toFixed(2)}
+          ${formatCurrency(total)}
         </span>
       </div>
     </div>

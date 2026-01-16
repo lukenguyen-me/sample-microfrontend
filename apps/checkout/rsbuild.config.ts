@@ -21,6 +21,11 @@ export default defineConfig({
           requiredVersion: false,
           eager: false,
         },
+        "@repo/shared-store": {
+          singleton: true,
+          requiredVersion: false,
+          eager: false,
+        },
       },
     }),
   ],
