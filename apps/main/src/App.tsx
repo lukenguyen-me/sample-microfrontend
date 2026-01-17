@@ -4,6 +4,7 @@ import type { CartItem, CheckoutItem } from "@repo/shared-store";
 import { EcommerceProvider, useEcommerceStore } from "@repo/shared-store";
 import type React from "react";
 import { useEffect, useState } from "react";
+import Header from "./components/Header";
 
 interface ProductListProps {
   title?: string;
@@ -105,6 +106,7 @@ const AppContent: React.FC = () => {
 
   return (
     <main className="min-h-screen bg-base-200">
+      <Header />
       <div className="container mx-auto max-w-screen-2xl">
         <div className="grid grid-cols-3 gap-6 p-6">
           <div className="col-span-2">
