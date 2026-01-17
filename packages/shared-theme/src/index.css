@@ -9,6 +9,11 @@
     bumblebee-dark --prefersdark;
 }
 
+/* Define custom font family for headings */
+@theme {
+  --font-heading: "Outfit", system-ui, sans-serif;
+}
+
 /* Custom bumblebee-dark theme: bumblebee colors on dark background */
 @plugin "daisyui/theme" {
   name: "bumblebee-dark";
@@ -34,6 +39,18 @@
   --color-success: oklch(70% 0.17 150);
   --color-warning: oklch(80% 0.18 85);
   --color-error: oklch(65% 0.2 25);
+}
+
+/* Apply Outfit font to all headings */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+  }
 }
 
 /* Workaround: DaisyUI btn border-radius missing due to nested @layer issue in Tailwind v4 */

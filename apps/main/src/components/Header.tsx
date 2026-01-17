@@ -47,7 +47,9 @@ const Header: React.FC = () => {
         <div className="navbar-start">
           <div className="flex items-center gap-3">
             <img src="/favicon.svg" alt="Logo" className="w-6 h-6" />
-            <span className="text-lg font-bold">Microfrontend Demo</span>
+            <span className="text-lg font-heading font-bold">
+              Microfrontend Demo
+            </span>
           </div>
         </div>
         <div className="navbar-end">
