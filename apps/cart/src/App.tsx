@@ -6,7 +6,7 @@ const App: React.FC = () => {
   return (
     <EcommerceProvider>
       <main className="min-h-screen bg-base-200">
-        <div className="fixed top-0 w-full text-center bg-neutral p-2 z-10">
+        <div className="fixed top-0 w-full text-center bg-neutral/80 p-2 z-10">
           <h1 className="font-semibold text-neutral-content">
             Cart Remote (Standalone Dev Mode)
           </h1>

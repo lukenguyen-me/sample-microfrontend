@@ -41,6 +41,7 @@ export default defineConfig({
   ],
   output: {
     injectStyles: true,
+    assetPrefix: "auto",
   },
   server: {
     port: 3000,

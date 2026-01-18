@@ -31,6 +31,7 @@ export default defineConfig({
   ],
   output: {
     injectStyles: true,
+    assetPrefix: "auto",
   },
   server: {
     port: 3003, // Ensure this doesn't clash with the Host (3000)
